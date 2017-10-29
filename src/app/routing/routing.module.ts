@@ -9,11 +9,13 @@ import { ErrorComponent } from '../components/error/error.component';
 import { MainMenuComponent } from '../components/main-menu/main-menu.component';
 import { AnagramComponent } from '../components/anagram/anagram.component';
 import { GuessTheNumberComponent } from '../components/guess-the-number/guess-the-number.component';
+import { RockPaperScissorsComponent } from '../components/rock-paper-scissors/rock-paper-scissors.component';
+import { MathChallengeComponent } from '../components/math-challenge/math-challenge.component';
 
 const appRoutes: Routes = [
   {
     path: "",
-    component: GuessTheNumberComponent
+    component: MathChallengeComponent
   },
   {
     path: "login",
@@ -34,6 +36,14 @@ const appRoutes: Routes = [
   {
     path: "guess-the-number",
     component: GuessTheNumberComponent
+  },
+  {
+    path: "rock-paper-scissors",
+    component: RockPaperScissorsComponent
+  },
+  {
+    path: "match-challenge",
+    component: MathChallengeComponent
   }
 ];
 
@@ -50,7 +60,9 @@ const appRoutes: Routes = [
     ErrorComponent,
     MainMenuComponent,
     AnagramComponent,
-    GuessTheNumberComponent
+    GuessTheNumberComponent,
+    RockPaperScissorsComponent,
+    MathChallengeComponent
   ],
 })
 export class RoutingModule { }

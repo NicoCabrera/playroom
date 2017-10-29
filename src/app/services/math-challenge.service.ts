@@ -7,15 +7,13 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class AnagramService {
+export class MathChallengeService {
 
-  constructor(public http: Http) {
-  }
+  constructor(public http: Http) { }
 
-
-  public getWords() {
+  public getCalculations() {
     return this.http
-      .get("./assets/data/anagramWords.json")
+      .get("./assets/data/mathChallenge.json")
       .toPromise()
       .then(this.jsonData)
   }
@@ -24,4 +22,7 @@ export class AnagramService {
 
     return resp.json() || {};
   }
+
+
+
 }
