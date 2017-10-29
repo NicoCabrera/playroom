@@ -8,12 +8,12 @@ import { LoginComponent } from '../components/login/login.component';
 import { ErrorComponent } from '../components/error/error.component';
 import { MainMenuComponent } from '../components/main-menu/main-menu.component';
 import { AnagramComponent } from '../components/anagram/anagram.component';
-
+import { GuessTheNumberComponent } from '../components/guess-the-number/guess-the-number.component';
 
 const appRoutes: Routes = [
   {
     path: "",
-    component: AnagramComponent
+    component: GuessTheNumberComponent
   },
   {
     path: "login",
@@ -30,6 +30,10 @@ const appRoutes: Routes = [
   {
     path: "anagram",
     component: AnagramComponent
+  },
+  {
+    path: "guess-the-number",
+    component: GuessTheNumberComponent
   }
 ];
 
@@ -45,7 +49,8 @@ const appRoutes: Routes = [
     LoginComponent,
     ErrorComponent,
     MainMenuComponent,
-    AnagramComponent
+    AnagramComponent,
+    GuessTheNumberComponent
   ],
 })
 export class RoutingModule { }
