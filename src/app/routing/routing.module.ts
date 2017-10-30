@@ -11,11 +11,12 @@ import { AnagramComponent } from '../components/anagram/anagram.component';
 import { GuessTheNumberComponent } from '../components/guess-the-number/guess-the-number.component';
 import { RockPaperScissorsComponent } from '../components/rock-paper-scissors/rock-paper-scissors.component';
 import { MathChallengeComponent } from '../components/math-challenge/math-challenge.component';
+import { SlidePuzzleComponent } from '../components/slide-puzzle/slide-puzzle.component';
 
 const appRoutes: Routes = [
   {
     path: "",
-    component: MathChallengeComponent
+    component: SlidePuzzleComponent
   },
   {
     path: "login",
@@ -44,7 +45,12 @@ const appRoutes: Routes = [
   {
     path: "match-challenge",
     component: MathChallengeComponent
+  },
+  {
+    path: "slide-puzzle",
+    component: SlidePuzzleComponent
   }
+  
 ];
 
 @NgModule({
@@ -62,7 +68,8 @@ const appRoutes: Routes = [
     AnagramComponent,
     GuessTheNumberComponent,
     RockPaperScissorsComponent,
-    MathChallengeComponent
+    MathChallengeComponent,
+    SlidePuzzleComponent
   ],
 })
 export class RoutingModule { }
