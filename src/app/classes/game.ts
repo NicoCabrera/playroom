@@ -1,8 +1,21 @@
+import { Timer } from "./timer";
+
 export class Game {
 
+    timer:Timer;
     constructor(public name: string) {
-
+        
     }
+
+
+    initTimer(seconds:number){
+        this.timer = new Timer(seconds);
+    }
+
+    startTimer(callback){
+        return this.timer.start(callback);
+    }
+
 }
 
 export enum OptionEnum {

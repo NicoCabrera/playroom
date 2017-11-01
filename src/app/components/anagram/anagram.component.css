@@ -29,3 +29,10 @@
     background-image: url("../../../assets/img/fondo-jungla.jpg");
     line-height: 5px;
 }
+.container{
+    display: none;
+}
+
+.btnTimer{
+    visibility:hidden;
+}
