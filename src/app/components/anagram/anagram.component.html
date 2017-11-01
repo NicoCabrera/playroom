@@ -1,6 +1,32 @@
+<nav>
+    <div class="nav-wrapper green">
+        <a href="#" class="brand-logo anagrama right">ANAGRAMA</a>
+    </div>
+</nav>
+<div class="row hide-on-small-only">
+    <div class="col s12 jungla white-text">
+        <h1 class="flow-text center-align text-jungla">QUE ANIMALES QUE VIVEN EN LA SELVA ?</h1>
+    </div>
+</div>
+<div class="row anagrama-jungla hide-on-med-and-up">
+    <div class="col s12 jungla white-text">
+        <h1 class="flow-text center-align text-jungla">QUE ANIMALES</h1>
+        <h1 class="flow-text center-align text-jungla">VIVEN EN LA SELVA ?</h1>
+    </div>
+</div>
 <div class="container">
-    <h1>{{game.shuffledWord}}</h1>
-    <input type="text" [(ngModel)]="game.wordUser">
-    <a class="waves-effect waves-light btn hide-on-small-only pink accent-3" (click)="validateAnswer()">button</a>
-    <a class="waves-effect waves-light btn hide-on-med-and-up full-size pink accent-3" (click)="validateAnswer()">button</a>
+    <div class="row">
+
+        <div class="col s12">
+            <p class="flow-text center-align anagrama">{{game.shuffledWord}}</p>
+            <div class="input-field">
+                <input type="text" [(ngModel)]="game.wordUser">
+                <label for="word">Ingrese la palabra correcta</label>
+            </div>
+            <a class="waves-effect waves-light btn hide-on-small-only red accent-2" (click)="validateAnswer()">Aceptar</a>
+            <a class="waves-effect waves-light btn hide-on-med-and-up full-size red accent-2" (click)="validateAnswer()">Aceptar</a>
+        </div>
+    </div>
+
+
 </div>

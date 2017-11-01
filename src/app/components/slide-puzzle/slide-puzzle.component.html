@@ -1,9 +1,2 @@
-<div class="container">
-  <div class="row">
-    <div id="{{tile.index}}" *ngFor="let tile of game.tiles" class="col s3 float-text center-align waves-effect waves-light btn-large teal" (click)="move(tile)">{{tile.index}}</div>
-  </div>
-  <a id="11" class="waves-effect waves-light btn-large red">Ver posicion</a>
-  <a (click)="volver()" class="waves-effect waves-light btn-large red">Volver</a>
-  <a (click)="saveCoordinates()" class="waves-effect waves-light btn-large red">Ver tiles</a>
-  <a (click)="hideLastElement()" class="waves-effect waves-light btn-large red">Esconder elemento 16</a>
+<div class="board">
 </div>
