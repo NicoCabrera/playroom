@@ -6,6 +6,8 @@ export class Anagram extends Game {
     wordToGuess: string;
     shuffledWord: string;
     wordUser: string;
+    startMessage:string;
+
 
     constructor(public name: string) {
         super(name);
@@ -14,6 +16,7 @@ export class Anagram extends Game {
         this.wordUser = "";
         this.shuffledWord = "";
         this.words = new Array<string>();
+        this.startMessage = "Empezar a jugar";
 
     }
 

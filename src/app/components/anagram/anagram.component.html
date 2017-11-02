@@ -5,7 +5,7 @@
 </nav>
 <div class="row hide-on-small-only">
     <div [class]="subtitleMDcol">
-        <h1 [class]="subtitleMDtext">QUE ANIMALES QUE VIVEN EN LA SELVA ?</h1>
+        <h1 [class]="subtitleMDtext">QUE ANIMALES VIVEN EN LA SELVA ?</h1>
     </div>
 </div>
 <div class="row anagrama-jungla hide-on-med-and-up">
@@ -38,8 +38,10 @@
     </div>
 </div>
 <div class="row">
-    <div class="col s4"></div>
+    <div class="col s4">
+    </div>
     <div class="col s4 center-align">
+        <h3 class="flow-text center-align anagrama">{{game.startMessage}}</h3>
         <a id="btnStart" class="btn-floating btn-large waves-effect waves-light red accent-3 pulse" (click)="startOnClick()">
             <i class="material-icons">play_arrow</i>
         </a>
