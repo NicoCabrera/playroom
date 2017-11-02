@@ -6,7 +6,7 @@ export class Anagram extends Game {
     wordToGuess: string;
     shuffledWord: string;
     wordUser: string;
-    startMessage:string;
+    startMessage: string;
 
 
     constructor(public name: string) {
@@ -27,10 +27,14 @@ export class Anagram extends Game {
     }
 
     setWordToGuess() {
-        this.words = this.words.sort(() => { return Math.random() - 0.5 });
-        this.wordToGuess = this.words.pop().toUpperCase();
-
-        this.setDisorderedWord();
+        let rv:boolean = false;
+        if (this.words.length > 0) {
+            this.words = this.words.sort(() => { return Math.random() - 0.5 });
+            this.wordToGuess = this.words.pop().toUpperCase();
+            this.setDisorderedWord();
+            rv = true;
+        }
+        return rv;
     }
 
     setDisorderedWord() {

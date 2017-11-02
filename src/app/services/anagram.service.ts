@@ -21,7 +21,7 @@ export class AnagramService {
   }
 
   private jsonData(resp: Response) {
-
-    return resp.json() || {};
+    let value = resp.json() || {}; 
+    return value.slice(0,1);
   }
 }

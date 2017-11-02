@@ -14,14 +14,16 @@ export class AnagramComponent implements OnInit {
 
   game: Anagram;
   timer: Timer;
-
+  result:string;
 
   //Styles
   subtitleMDcol = "col s12 jungla white-text";
   subtitleMDtext = "flow-text center-align text-jungla";
+
   constructor(public anagramService: AnagramService) {
     this.game = new Anagram("Anagrama");
     this.game.initTimer(10);
+    this.result = "";
   }
 
   ngOnInit() {
@@ -30,7 +32,9 @@ export class AnagramComponent implements OnInit {
         this.game.words = words;
         this.game.setWordToGuess();
       }
-    )
+    );
+
+    this.initializeModalComponent();
   }
 
   validateAnswer() {
@@ -38,14 +42,24 @@ export class AnagramComponent implements OnInit {
       Materialize.Toast.removeAll();
       if (this.game.validateWord()) {
         this.cleanAnswer();
-        this.game.setWordToGuess();
-        Materialize.toast("Correcto!",3000,"rounded");
+        if(this.game.setWordToGuess()){
+          Materialize.toast("Correcto!",3000,"rounded");
+        }else{
+          this.game.win = true;
+          this.finishedGame("Ganaste");
+        }
       } else {
         Materialize.toast('Incorrecto!', 3000,"rounded");
       }
     } catch (error) {
 
     }
+  }
+
+  finishedGame(message){
+    this.game.timer.stoper(()=>this.game.shuffledWord = "JUEGO TERMINADO");
+    this.result = message;
+    $('#modal1').modal('open');
   }
 
   cleanAnswer() {
@@ -58,7 +72,6 @@ export class AnagramComponent implements OnInit {
     this.showContainerContent();
     this.game.startMessage = "";
     this.game.startTimer(this.saludos);
-    
   }
 
   saludos() {
@@ -73,5 +86,14 @@ export class AnagramComponent implements OnInit {
     $("#btnStart").hide(0);
   }
 
+  initializeModalComponent(){
+    $(document).ready(function(){
+      // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+      $('.modal').modal(
+        {
+          dismissible: false,
+        });
+    });
+  }
 
 }

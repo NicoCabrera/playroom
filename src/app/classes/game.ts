@@ -3,6 +3,9 @@ import { Timer } from "./timer";
 export class Game {
 
     timer:Timer;
+    win:boolean;
+    
+
     constructor(public name: string) {
         
     }
