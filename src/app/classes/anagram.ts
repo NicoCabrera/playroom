@@ -43,4 +43,6 @@ export class Anagram extends Game {
         } while (this.shuffledWord == this.wordToGuess);
     }
 
+    
+
 }

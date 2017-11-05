@@ -11,13 +11,12 @@ import { AnagramComponent } from '../components/anagram/anagram.component';
 import { GuessTheNumberComponent } from '../components/guess-the-number/guess-the-number.component';
 import { RockPaperScissorsComponent } from '../components/rock-paper-scissors/rock-paper-scissors.component';
 import { MathChallengeComponent } from '../components/math-challenge/math-challenge.component';
-import { SlidePuzzleComponent } from '../components/slide-puzzle/slide-puzzle.component';
 import { MemoTestComponent } from '../components/memo-test/memo-test.component';
 
 const appRoutes: Routes = [
   {
     path: "",
-    component: GuessTheNumberComponent
+    component: MemoTestComponent
   },
   {
     path: "login",
@@ -48,10 +47,6 @@ const appRoutes: Routes = [
     component: MathChallengeComponent
   },
   {
-    path: "slide-puzzle",
-    component: SlidePuzzleComponent
-  },
-  {
     path: "memo-test",
     component: MemoTestComponent
   }
@@ -74,7 +69,6 @@ const appRoutes: Routes = [
     GuessTheNumberComponent,
     RockPaperScissorsComponent,
     MathChallengeComponent,
-    SlidePuzzleComponent,
     MemoTestComponent
   ],
 })

@@ -1,0 +1,15 @@
+.tile-container{
+    height: 10rem;
+    padding: 0.5rem;
+    position: relative;
+}
+
+.tile{
+    padding: 0.5rem;
+    height: 90%;
+    width: 100%;
+}
+
+.cover{
+    background-color: #9e9e9e;
+}

@@ -1,3 +1,10 @@
-<p>
-  memo-test works!
-</p>
+<button class="waves-effect waves-light btn cyan full flow-text" (click)="setTiles()">Comenzar</button>
+<div class="container">
+  <div class="row">
+    <div *ngFor="let color of game.colors;let i = index" class="col s3 tile-container">
+      <div class="card tile cover hoverable" (click)="showColor(i,color)" id="{{i}}">
+        <div class="card-content white-text">
+        </div>
+      </div>
+    </div>
+  </div>
