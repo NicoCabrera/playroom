@@ -1,0 +1,43 @@
+.full-size{
+    width: 100%;
+}
+
+@font-face{
+    font-family: tiza;
+    src: url("../../../assets/fonts/tiza.ttf");
+}
+
+.tiza-text{
+    font-family: tiza;
+    
+}
+
+@font-face{
+    font-family: digital;
+    src: url("../../../assets/fonts/digital.ttf");
+}
+
+.digital-text{
+    font-family: digital;
+}
+
+.pizarra{
+    background-image: url("../../../assets/img/pizarra.jpg");
+}
+
+.crono{
+    position: absolute;
+    left: 0;
+    top: 45%;
+    width: 100%;
+    text-align: center;
+}
+.crono-container{
+    position: relative;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

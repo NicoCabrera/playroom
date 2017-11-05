@@ -17,7 +17,7 @@ import { MemoTestComponent } from '../components/memo-test/memo-test.component';
 const appRoutes: Routes = [
   {
     path: "",
-    component: AnagramComponent
+    component: RockPaperScissorsComponent
   },
   {
     path: "login",

@@ -7,21 +7,26 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class AnagramService {
+export class GameService {
 
-  constructor(public http: Http) {
+  constructor(public http: Http) { 
+
   }
 
-
-  public getWords() {
+  public getScores() {
     return this.http
-      .get("./assets/data/anagramWords.json")
+      .get("./assets/data/scores.json")
       .toPromise()
       .then(this.jsonData)
   }
 
-  private jsonData(resp: Response) {
-    let value = resp.json() || {}; 
-    return value.slice(0,10);
+  public saveScores(){
+
   }
+  
+  private jsonData(resp: Response) {
+
+    return resp.json() || {};
+  }
+
 }

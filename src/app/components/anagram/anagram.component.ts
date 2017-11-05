@@ -14,7 +14,7 @@ export class AnagramComponent implements OnInit {
 
   game: Anagram;
   timer: Timer;
-  result:string;
+  result: string;
 
   //Styles
   subtitleMDcol = "col s12 jungla white-text";
@@ -22,7 +22,7 @@ export class AnagramComponent implements OnInit {
 
   constructor(public anagramService: AnagramService) {
     this.game = new Anagram("Anagrama");
-    this.game.initTimer(10);
+    this.game.initTimer(1);
     this.result = "";
   }
 
@@ -35,6 +35,12 @@ export class AnagramComponent implements OnInit {
     );
 
     this.initializeModalComponent();
+
+    $("#userWord").keypress((e)=>{
+      if(e.which == 13) {
+         this.validateAnswer();
+      }
+   });
   }
 
   validateAnswer() {
@@ -42,58 +48,76 @@ export class AnagramComponent implements OnInit {
       Materialize.Toast.removeAll();
       if (this.game.validateWord()) {
         this.cleanAnswer();
-        if(this.game.setWordToGuess()){
-          Materialize.toast("Correcto!",3000,"rounded");
-        }else{
+        if (this.game.setWordToGuess()) {
+          Materialize.toast("Correcto!", 3000, "rounded");
+        } else {
           this.game.win = true;
-          this.finishedGame("Ganaste");
+          this.finishedGame("GANASTE");
         }
       } else {
-        Materialize.toast('Incorrecto!', 3000,"rounded");
+        Materialize.toast('Incorrecto!', 3000, "rounded");
       }
     } catch (error) {
 
     }
   }
 
-  finishedGame(message){
-    this.game.timer.stoper(()=>this.game.shuffledWord = "JUEGO TERMINADO");
+  finishedGame(message) {
+    this.game.score = this.game.timer.timeLeft * 10;
+    this.game.timer.stoper(() => this.game.shuffledWord = "JUEGO TERMINADO");
     this.result = message;
     $('#modal1').modal('open');
   }
 
   cleanAnswer() {
     this.game.wordUser = "";
-
   }
 
 
   startOnClick() {
     this.showContainerContent();
     this.game.startMessage = "";
-    this.game.startTimer(this.saludos);
-  }
-
-  saludos() {
-    $("#pulse-timer").removeClass("pulse");
+    this.game.startTimer(() => {
+      $("#pulse-timer").removeClass("pulse");
+      this.game.timer.stoper(() => {
+        this.game.shuffledWord = "JUEGO TERMINADO";
+        this.result = "PERDISTE!";
+        $('#modal1').modal('open');
+      });
+    });
   }
 
   showContainerContent() {
     $(".container").slideDown("slow", () => {
       $(".btnTimer").css("visibility", "visible");
-      this.game.startMessage = "Tiempo restante";
+      this.game.startMessage = "tiempo restante";
     });
     $("#btnStart").hide(0);
   }
 
-  initializeModalComponent(){
-    $(document).ready(function(){
+  initializeModalComponent() {
+    $(document).ready(function () {
       // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
       $('.modal').modal(
         {
           dismissible: false,
         });
     });
+  }
+
+  playAgain(){
+    this.game = new Anagram("Anagrama");
+    this.game.initTimer(300);
+    this.result = "";
+
+    this.anagramService.getWords().then(
+      (words) => {
+        this.game.words = words;
+        this.game.setWordToGuess();
+      }
+    );
+    this.startOnClick();
+    $("#pulse-timer").addClass("pulse");
   }
 
 }
