@@ -16,7 +16,7 @@ import { MemoTestComponent } from '../components/memo-test/memo-test.component';
 const appRoutes: Routes = [
   {
     path: "",
-    component: MemoTestComponent
+    component: MainMenuComponent
   },
   {
     path: "login",
