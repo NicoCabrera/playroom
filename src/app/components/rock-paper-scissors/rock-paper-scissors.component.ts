@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RockPaperScissors } from '../../classes/rock-paper-scissors';
 import { OptionEnum, MatchResultEnum } from '../../classes/game';
+import { Router } from '@angular/router';
 declare var $;
 declare var Materialize;
 
@@ -13,17 +14,19 @@ export class RockPaperScissorsComponent implements OnInit {
   public game: RockPaperScissors;
   public imageForUserValue: string;
   public imageForPCValue: string;
-
-  constructor() {
+  public result: string;
+  constructor(private router: Router) {
     this.game = new RockPaperScissors("Piedra papel o tijera");
     this.imageForUserValue = "assets/img/piedraa.png";
     this.imageForPCValue = "assets/img/piedrab.png";
+    this.result = "";
   }
 
   ngOnInit() {
     this.game.computerRandomOption = OptionEnum.Rock;
     this.game.userChosenOption = OptionEnum.Rock;
     this.setInitialAnimations();
+    this.initializeModalComponent();
   }
 
   setInitialAnimations() {
@@ -35,6 +38,14 @@ export class RockPaperScissorsComponent implements OnInit {
         });
         return this;
       }
+    });
+  }
+  initializeModalComponent() {
+    $(document).ready(function () {
+      $('#modalRockPaperScissors').modal(
+        {
+          dismissible: false,
+        });
     });
   }
 
@@ -67,6 +78,9 @@ export class RockPaperScissorsComponent implements OnInit {
       default:
         Materialize.toast("Empate", 3000, "rounded");
         break;
+    }
+    if (this.game.partialLoses == 2 || this.game.partialWins == 2) {
+      this.finishGame()
     }
   }
 
@@ -104,6 +118,30 @@ export class RockPaperScissorsComponent implements OnInit {
       default:
         break;
     }
+  }
+  goToRegisteredUserMenu() {
+    this.router.navigate(["/registered-users"]);
+  }
+
+  finishGame() {
+    this.setResultMessage();
+    $('#modalRockPaperScissors').modal('open');
+  }
+
+
+  setResultMessage() {
+    if (this.game.partialWins == 2) {
+      this.result = "GANASTE!"
+    } else {
+      this.result = "PERDISTE!";
+    }
+  }
+
+  playAgain(){
+    this.game = new RockPaperScissors("Piedra papel o tijera");
+    this.imageForUserValue = "assets/img/piedraa.png";
+    this.imageForPCValue = "assets/img/piedrab.png";
+    this.result = "";
   }
 
 

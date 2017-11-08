@@ -1,10 +1,12 @@
 <nav class="hide-on-med-and-up">
   <div class="nav-wrapper black">
+    <a class="waves-effect waves-light secondary-text flow-text" (click)="goToRegisteredUserMenu()">* UTN GAMES</a>
     <a href="#" class="brand-logo anagrama center flow-text tiza-text"></a>
   </div>
 </nav>
 <nav class="hide-on-small-only">
   <div class="nav-wrapper black">
+      <a class="waves-effect waves-light secondary-text flow-text" (click)="goToRegisteredUserMenu()">* UTN GAMES</a>
     <a href="#" class="brand-logo anagrama right flow-text tiza-text">PIEDRA PAPEL O TIJERA</a>
   </div>
 </nav>
@@ -32,8 +34,23 @@
       </a>
     </div>
     <ul class="collection">
-        <li class="collection-item green white-text center-align">Ganadas: {{game.partialWins}}</li>
-        <li class="collection-item red white-text center-align">Perdidas: {{game.partialLoses}}</li>
-      </ul>
+      <li class="collection-item green white-text center-align">Ganadas: {{game.partialWins}}</li>
+      <li class="collection-item red white-text center-align">Perdidas: {{game.partialLoses}}</li>
+    </ul>
   </div>
 </div>
+
+<!-- Modal Structure -->
+<div id="modalRockPaperScissors" class="modal">
+    <div class="modal-content">
+      <h4 class="center-align">{{result}}</h4>
+    </div>
+    <div class="row">
+      <div class="col s6">
+        <button class="modal-action modal-close waves-effect waves-light btn cyan flow-text full-size" (click)="playAgain()">Volver a jugar</button>
+      </div>
+      <div class="col s6">
+        <button class="modal-action modal-close waves-effect waves-light btn blue flow-text full-size" (click)="goToRegisteredUserMenu()">Salir</button>
+      </div>
+    </div>
+  </div>
