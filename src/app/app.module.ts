@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { RoutingModule } from './routing/routing.module';
 
 
-
 @NgModule({
   declarations: [
     AppComponent
@@ -17,7 +16,9 @@ import { RoutingModule } from './routing/routing.module';
     BrowserModule,
     RoutingModule,
     RouterModule,
-    HttpModule
+    HttpModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

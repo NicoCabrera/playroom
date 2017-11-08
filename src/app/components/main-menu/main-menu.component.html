@@ -3,10 +3,10 @@
     <a href="#" class="brand-logo secondary-text">* UTN GAMES</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li>
-        <a href="sass.html" class="secondary-text flow-text">Ingresar</a>
+        <a href="#modal1" class="secondary-text flow-text modal-trigger">Ingresar</a>
       </li>
       <li>
-        <a href="badges.html" class="secondary-text flow-text">Registrarse</a>
+        <a href="#modal1" class="secondary-text flow-text modal-trigger">Registrarse</a>
       </li>
     </ul>
   </div>
@@ -61,6 +61,37 @@
   <div class="row hide-on-med-and-up">
     <div class="col s6">
       <img class="materialboxed responsive-img right" data-caption="Memoriza colores y posiciones" width="250" src="assets/img/mini-memo.jpg">
+    </div>
+  </div>
+</div>
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content bordered-modal">
+    <div class="row">
+      <form class="col s12" [formGroup]="loginForm">
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">account_circle</i>
+            <input id="icon_prefix" type="text" class="validate" formControlName="name">
+            <label for="icon_prefix">Nombre de Usuario</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">email</i>
+            <input id="icon_telephone" type="email" class="validate" formControlName="email">
+            <label for="icon_telephone">Correo</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">vpn_key</i>
+            <input id="icon_telephone" type="password" class="validate" formControlName="password">
+            <label for="icon_telephone">Contraseña</label>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row">
+      <div class="col s12 center-align">
+        <a class="waves-effect waves-light btn deep-purple lighten-1" (click)="validateUser()">Iniciar Sesión</a>
+      </div>
     </div>
   </div>
 </div>
