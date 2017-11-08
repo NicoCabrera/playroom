@@ -5,3 +5,10 @@
 .full{
     width:100%;
 }
+@font-face{
+    font-family: secondary;
+    src: url("../../../assets/fonts/secondary.ttf");
+}
+.secondary-text{
+    font-family: secondary;
+}

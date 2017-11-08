@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GuessTheNumber } from '../../classes/guess-the-number';
+import { Router } from '@angular/router';
 declare var Materialize;
 declare var $;
 
@@ -8,10 +9,11 @@ declare var $;
   templateUrl: './guess-the-number.component.html',
   styleUrls: ['./guess-the-number.component.css']
 })
-export class GuessTheNumberComponent implements OnInit {
+export class GuessTheNumberComponent implements OnInit , OnDestroy{
+ 
   game: GuessTheNumber;
   result: string;
-  constructor() {
+  constructor(private router:Router) {
     this.game = new GuessTheNumber("Adivina el número", 10, 1);
     this.game.initTimer(300);
     this.result = "";
@@ -29,13 +31,17 @@ export class GuessTheNumberComponent implements OnInit {
     this.start();
   }
 
+  ngOnDestroy(): void {
+    this.game.timer.stoper(()=>{});
+  }
+
 
   start() {
     this.game.startTimer(() => {
       this.game.timer.stoper(() => {
         this.game.win = false;
         this.result = "PERDISTE!";
-        $('#modal1').modal('open');
+        $('#modalGuessTheNumber').modal('open');
       });
     });
   }
@@ -64,7 +70,7 @@ export class GuessTheNumberComponent implements OnInit {
 
   initializeModalComponent() {
     $(document).ready(function () {
-      $('.modal').modal(
+      $('#modalGuessTheNumber').modal(
         {
           dismissible: false,
         });
@@ -74,7 +80,21 @@ export class GuessTheNumberComponent implements OnInit {
   finishedGame(message) {
     this.game.score = this.game.timer.timeLeft * 10;
     this.game.timer.stoper(() => this.result = message);
-    $('#modal1').modal('open');
+    $('#modalGuessTheNumber').modal('open');
+  }
+
+  goToRegisteredUserMenu(){
+    this.router.navigate(["/registered-users"]);
+  }
+
+
+  playAgain(){
+    this.game = new GuessTheNumber("Adivina el número", 10, 1);
+    this.game.initTimer(300);
+    this.result = "";
+
+    this.game.generateRandomValue();
+    this.start();
   }
 
 }
