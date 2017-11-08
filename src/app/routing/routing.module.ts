@@ -27,10 +27,6 @@ const appRoutes: Routes = [
     component: MainMenuComponent,
   },
   {
-    path: "**",
-    component: ErrorComponent
-  },
-  {
     path: "anagram",
     component: AnagramComponent
   },
@@ -49,8 +45,12 @@ const appRoutes: Routes = [
   {
     path: "memo-test",
     component: MemoTestComponent
+  },
+  {
+    path: "**",
+    component: ErrorComponent
   }
-  
+
 ];
 
 @NgModule({

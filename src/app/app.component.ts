@@ -17,11 +17,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-    $('.carousel.carousel-slider').carousel({ fullWidth: true, indicators: true, noWrap: true });
-    $(document).ready(function(){
-      $('.collapsible').collapsible();
-    });
+  
   }
 
 }
