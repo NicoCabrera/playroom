@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MathChallengeService } from '../../services/math-challenge.service';
 import { MathChallenge } from '../../classes/math-challenge';
+import { Router } from '@angular/router';
 declare var $;
 declare var Materialize;
 
@@ -10,12 +11,13 @@ declare var Materialize;
   styleUrls: ['./math-challenge.component.css'],
   providers: [MathChallengeService]
 })
-export class MathChallengeComponent implements OnInit {
+export class MathChallengeComponent implements OnInit,OnDestroy {
+  
 
   public game: MathChallenge;
   public result: string;
 
-  constructor(public mathChallengeService: MathChallengeService) {
+  constructor(public mathChallengeService: MathChallengeService, private router: Router) {
     this.game = new MathChallenge("Agilidad aritmética");
     this.result = "";
   }
@@ -24,7 +26,6 @@ export class MathChallengeComponent implements OnInit {
     this.mathChallengeService.getCalculations()
       .then((calculations) => {
         this.game.calculations = calculations;
-        console.log(calculations)
         this.game.setCalculation();
       });
     this.game.initTimer(300);
@@ -37,8 +38,8 @@ export class MathChallengeComponent implements OnInit {
     });
   }
 
-  viewSelectedCalculation() {
-    console.log(this.game.calculation);
+  ngOnDestroy(): void {
+    this.game.timer.stoper(()=>{});
   }
 
   viewSelectedCalculationResult() {
@@ -50,7 +51,7 @@ export class MathChallengeComponent implements OnInit {
       this.game.timer.stoper(() => {
         this.game.win = false;
         this.result = "PERDISTE!";
-        $('#modal1').modal('open');
+        $('#modalMathChallenge').modal('open');
       });
     });
   }
@@ -67,15 +68,15 @@ export class MathChallengeComponent implements OnInit {
         }
       } else {
         Materialize.toast("Incorrecto!", 3000, "rounded");
-        if(this.game.timer.timeLeft >= 10){
-          this.game.timer.timeLeft = this.game.timer.timeLeft - 10;  
-        }else{
-          this.game.timer.stoper(()=>{
+        if (this.game.timer.timeLeft >= 10) {
+          this.game.timer.timeLeft = this.game.timer.timeLeft - 10;
+        } else {
+          this.game.timer.stoper(() => {
             this.finishedGame("PERDISTE!");
             this.game.score = 0;
           });
         }
-        
+
       }
     } catch (error) {
 
@@ -84,17 +85,33 @@ export class MathChallengeComponent implements OnInit {
 
   finishedGame(message) {
     this.game.score = this.game.timer.timeLeft * 10;
-    this.game.timer.stoper(() => { this.result = message; console.log(this.result)});
-    $('#modal1').modal('open');
+    this.game.timer.stoper(() => { this.result = message; });
+    $('#modalMathChallenge').modal('open');
   }
 
   initializeModalComponent() {
     $(document).ready(function () {
-      $('.modal').modal(
+      $('#modalMathChallenge').modal(
         {
           dismissible: false,
         });
     });
   }
 
+  goToRegisteredUserMenu() {
+    this.router.navigate(["/registered-users"]);
+  }
+
+  playAgain() {
+    this.game = new MathChallenge("Agilidad aritmética");
+    this.result = "";
+
+    this.mathChallengeService.getCalculations()
+      .then((calculations) => {
+        this.game.calculations = calculations;
+        this.game.setCalculation();
+      });
+    this.game.initTimer(300);
+    this.start();
+  }
 }

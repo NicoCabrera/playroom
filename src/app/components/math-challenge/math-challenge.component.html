@@ -1,10 +1,11 @@
 <nav class="hide-on-med-and-up">
   <div class="nav-wrapper yellow darken-2">
-    <a href="#" class="brand-logo anagrama center flow-text tiza-text">ARITMETICA</a>
+    <a class="waves-effect waves-light secondary-text flow-text" (click)="goToRegisteredUserMenu()">* UTN GAMES</a>
   </div>
 </nav>
 <nav class="hide-on-small-only">
   <div class="nav-wrapper yellow darken-2">
+    <a class="waves-effect waves-light secondary-text flow-text" (click)="goToRegisteredUserMenu()">* UTN GAMES</a>
     <a href="#" class="brand-logo anagrama right flow-text tiza-text">AGILIDAD ARITMETICA</a>
   </div>
 </nav>
@@ -39,26 +40,26 @@
     <div class="col s4"></div>
   </div>
 </div>
-    <!-- Modal Structure -->
-    <div id="modal1" class="modal bottom-sheet">
-        <div class="modal-content">
-            <div class="row">
-                <div class="col s12">
-                    <h4 class="center-align text-jungla">{{result}}</h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    <h4 class="center-align text-jungla flow-text">PUNTAJE: {{game.score}}</h4>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <div class="row">
-                <div class="col s4 offset-s4">
-                    <a href="#!" class="btn modal-action modal-close waves-effect waves-light green accent-4 full-size" (click)="playAgain()">JUGAR</a>
-                    <a href="/" class="btn modal-action modal-close waves-effect waves-light red accent-3 full-size">SALIR</a>
-                </div>
-            </div>
-        </div>
+<!-- Modal Structure -->
+<div id="modalMathChallenge" class="modal bottom-sheet">
+  <div class="modal-content">
+    <div class="row">
+      <div class="col s12">
+        <h4 class="center-align text-jungla">{{result}}</h4>
+      </div>
     </div>
+    <div class="row">
+      <div class="col s12">
+        <h4 class="center-align text-jungla flow-text">PUNTAJE: {{game.score}}</h4>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col s4 offset-s4">
+        <a class="btn modal-action modal-close waves-effect waves-light green accent-4 full-size" (click)="playAgain()">JUGAR</a>
+        <a class="btn modal-action modal-close waves-effect waves-light red accent-3 full-size" (click)="goToRegisteredUserMenu()">SALIR</a>
+      </div>
+    </div>
+  </div>
+</div>
