@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { User } from '../../classes/user';
 import { Router } from '@angular/router';
@@ -9,7 +9,10 @@ declare var Materialize;
   templateUrl: './main-menu.component.html',
   styleUrls: ['./main-menu.component.css']
 })
-export class MainMenuComponent implements OnInit {
+export class MainMenuComponent implements OnInit, AfterViewInit {
+  ngAfterViewInit(): void {
+    this.initializeComponent();
+  }
 
   loginForm: FormGroup;
   user: User;
@@ -20,12 +23,11 @@ export class MainMenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initializeComponent();
-
+    // this.initializeComponent();
     this.loginForm = this.fb.group({
-      name: new FormControl(this.user.name, [Validators.required, Validators.maxLength(50)]),
+      name: new FormControl(this.user.name, [Validators.required, Validators.maxLength(20)]),
       password: new FormControl(this.user.password, [Validators.required, Validators.maxLength(50)]),
-      email: new FormControl(this.user.email, [Validators.required, Validators.maxLength(50),Validators.email])
+      email: new FormControl(this.user.email, [Validators.required, Validators.maxLength(10),Validators.email])
     });
   }
 
@@ -58,10 +60,10 @@ export class MainMenuComponent implements OnInit {
       this.setErrorMessageContent();
 
     }else{
-      this.router.navigateByUrl("/memo-test");
-      $('.modal').modal().close();
+      localStorage.setItem("username",this.loginForm.get("name").value);
+      $('#modal1').modal('close');
+      this.router.navigateByUrl("/registered-users");
     }   
-    //$('#modal1').modal('close');
   }
 
   setErrorMessageContent(){
@@ -85,6 +87,13 @@ export class MainMenuComponent implements OnInit {
     if(this.errorLoginMessage != ""){
       Materialize.toast(this.errorLoginMessage, 3000, "rounded");
     }
+  }
+
+  setDefaultData(){
+    this.loginForm.get("name").setValue("Nuevo usuario");
+    this.loginForm.get("email").setValue("usuario@prueba.com");
+    this.loginForm.get("password").setValue("123456");
+    this.loginForm["_status"] = true;
   }
 
 }

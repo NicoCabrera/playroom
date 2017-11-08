@@ -1,0 +1,48 @@
+<nav>
+  <div class="nav-wrapper deep-purple lighten-1 z-depth-4">
+    <a class="secondary-text flow-text">* UTN GAMES</a>
+    <ul class="right">
+      <li>
+        <a class='waves-effect waves-light deep-purple lighten-1 right secondary-text flow-text' (click)="logOut()">Salir</a>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+<div class="container">
+  <h1 class="flow-text">Listado de juegos</h1>
+  <ul class="collection">
+    <a class="collection-item avatar" routerLink="/guess-the-number">
+      <img src="assets/img/mini-adivina.jpg" alt="" class="circle">
+      <span class="title purple-text flow-text">Adivina el número</span>
+      <p class="black-text">Adivina un número secreto, del 1 al 10 en un limite de tiempo.
+        <br>Los intentos fallidos restan segundos.</p>
+    </a>
+    <a class="collection-item avatar" routerLink="/rock-paper-scissors">
+      <img src="assets/img/mini-ppt.jpg" alt="" class="circle">
+      <span class="title purple-text flow-tex">Piedra Papel o Tijera</span>
+      <p class="black-text">Al mejor de 3 intentos.
+      </p>
+    </a>
+    <a class="collection-item avatar" routerLink="/math-challenge">
+      <img src="assets/img/mini-agilidad.jpg" alt="" class="circle">
+      <span class="title purple-text flow-tex">Agilidad Aritmética</span>
+      <p class="black-text">Consigue contestar todos los cálculos en un maximo de 5 minutos.
+      </p>
+    </a>
+    <a class="collection-item avatar" routerLink="/memo-test">
+      <img src="assets/img/mini-memo.jpg" alt="" class="circle">
+      <span class="title purple-text flow-tex">Memotest</span>
+      <p class="black-text">Da vuelta las cartas hasta encontrar el par del mismo color.
+        <br> Consigue dar vuelta todas en tiempo record y sumarás más puntos.
+      </p>
+    </a>
+    <a class="collection-item avatar" routerLink="/anagram">
+      <img src="assets/img/mini-anagrama.jpg" alt="" class="circle">
+      <span class="title purple-text flow-tex">Anagrama</span>
+      <p class="black-text">Anagrama temático.
+        <br> Las palabras desordenadas son el nombre de algún animal que vive en la selva.
+      </p>
+    </a>
+  </ul>
+</div>

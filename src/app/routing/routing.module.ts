@@ -12,6 +12,8 @@ import { GuessTheNumberComponent } from '../components/guess-the-number/guess-th
 import { RockPaperScissorsComponent } from '../components/rock-paper-scissors/rock-paper-scissors.component';
 import { MathChallengeComponent } from '../components/math-challenge/math-challenge.component';
 import { MemoTestComponent } from '../components/memo-test/memo-test.component';
+import { RegisteredUsersComponent } from '../components/registered-users/registered-users.component';
+import { SessionManagerService } from '../services/session-manager.service';
 
 const appRoutes: Routes = [
   {
@@ -28,23 +30,33 @@ const appRoutes: Routes = [
   },
   {
     path: "anagram",
-    component: AnagramComponent
+    component: AnagramComponent,
+    canActivate: [SessionManagerService]
   },
   {
     path: "guess-the-number",
-    component: GuessTheNumberComponent
+    component: GuessTheNumberComponent,
+    canActivate: [SessionManagerService]
   },
   {
     path: "rock-paper-scissors",
-    component: RockPaperScissorsComponent
+    component: RockPaperScissorsComponent,
+    canActivate: [SessionManagerService]
   },
   {
-    path: "match-challenge",
-    component: MathChallengeComponent
+    path: "math-challenge",
+    component: MathChallengeComponent,
+    canActivate: [SessionManagerService]
   },
   {
     path: "memo-test",
-    component: MemoTestComponent
+    component: MemoTestComponent,
+    canActivate: [SessionManagerService]
+  },
+  {
+    path: "registered-users",
+    component: RegisteredUsersComponent,
+    canActivate: [SessionManagerService]
   },
   {
     path: "**",
@@ -70,7 +82,10 @@ const appRoutes: Routes = [
     GuessTheNumberComponent,
     RockPaperScissorsComponent,
     MathChallengeComponent,
-    MemoTestComponent
+    MemoTestComponent,
+    RegisteredUsersComponent,
+
   ],
+  providers: [SessionManagerService]
 })
 export class RoutingModule { }
