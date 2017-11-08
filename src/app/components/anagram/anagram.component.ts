@@ -53,7 +53,6 @@ export class AnagramComponent implements OnInit , OnDestroy{
 
   validateAnswer() {
     try {
-      Materialize.Toast.removeAll();
       if (this.game.validateWord()) {
         this.cleanAnswer();
         if (this.game.setWordToGuess()) {
@@ -128,7 +127,7 @@ export class AnagramComponent implements OnInit , OnDestroy{
   }
 
   goToRegisteredUserMenu(){
-    this.router.navigate(["/registered-users"]);
+    this.router.navigate(["/registered-users/list-of-games"]);
   }
 
 }

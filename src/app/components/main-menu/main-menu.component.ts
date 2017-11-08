@@ -16,8 +16,8 @@ export class MainMenuComponent implements OnInit, AfterViewInit {
 
   loginForm: FormGroup;
   user: User;
-  errorLoginMessage:string;
-  constructor(private fb: FormBuilder,private router:Router) {
+  errorLoginMessage: string;
+  constructor(private fb: FormBuilder, private router: Router) {
     this.user = new User();
     this.errorLoginMessage = "";
   }
@@ -26,8 +26,8 @@ export class MainMenuComponent implements OnInit, AfterViewInit {
     // this.initializeComponent();
     this.loginForm = this.fb.group({
       name: new FormControl(this.user.name, [Validators.required, Validators.maxLength(20)]),
-      password: new FormControl(this.user.password, [Validators.required, Validators.maxLength(50)]),
-      email: new FormControl(this.user.email, [Validators.required, Validators.maxLength(10),Validators.email])
+      email: new FormControl(this.user.email, [Validators.required, Validators.maxLength(30), Validators.email]),
+      password: new FormControl(this.user.password, [Validators.required, Validators.maxLength(50)])
     });
   }
 
@@ -50,46 +50,45 @@ export class MainMenuComponent implements OnInit, AfterViewInit {
       alignment: 'left', // Displays dropdown with edge aligned to the left of button
       stopPropagation: false // Stops event propagation
     }
-  );
+    );
   }
 
 
   validateUser() {
-    if(this.loginForm.invalid){
-
+    if (this.loginForm.invalid) {
       this.setErrorMessageContent();
-
-    }else{
-      localStorage.setItem("username",this.loginForm.get("name").value);
+    } else {
+      localStorage.setItem("username", this.loginForm.get("name").value);
+      localStorage.setItem("email", this.loginForm.get("email").value);
       $('#modal1').modal('close');
-      this.router.navigateByUrl("/registered-users");
-    }   
+      this.router.navigateByUrl("/registered-users/list-of-games");
+    }
   }
 
-  setErrorMessageContent(){
+  setErrorMessageContent() {
     this.errorLoginMessage = "";
-    if(this.loginForm.get("name").value == ""){
+    if (this.loginForm.get("name").value == "") {
       this.errorLoginMessage = "Ingrese un nombre de usuario.";
     }
-    if(this.loginForm.get("email").value == ""){
-      if(this.errorLoginMessage != ""){
+    if (this.loginForm.get("email").value == "") {
+      if (this.errorLoginMessage != "") {
         this.errorLoginMessage += "</br>";
       }
       this.errorLoginMessage += "Ingrese un mail.";
     }
-    if(this.loginForm.get("password").invalid){
-      if(this.errorLoginMessage != ""){
+    if (this.loginForm.get("password").invalid) {
+      if (this.errorLoginMessage != "") {
         this.errorLoginMessage += "</br>";
       }
       this.errorLoginMessage += "Ingrese una contraseña.";
     }
 
-    if(this.errorLoginMessage != ""){
+    if (this.errorLoginMessage != "") {
       Materialize.toast(this.errorLoginMessage, 3000, "rounded");
     }
   }
 
-  setDefaultData(){
+  setDefaultData() {
     this.loginForm.get("name").setValue("Nuevo usuario");
     this.loginForm.get("email").setValue("usuario@prueba.com");
     this.loginForm.get("password").setValue("123456");

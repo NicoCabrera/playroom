@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+declare var $;
 
 @Component({
   selector: 'app-registered-users',
@@ -8,14 +9,25 @@ import { Router } from '@angular/router';
 })
 export class RegisteredUsersComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  username:string;
+  email:string;
+  constructor(private router:Router) { 
+    this.username = localStorage.getItem("username");
+    this.email = localStorage.getItem("email");
+  }
 
   ngOnInit() {
+    $(".button-collapse").sideNav({
+      closeOnClick: true,
+    });
+    console.log("El nombre de usuario es: " + this.username);
   }
 
   logOut(){
     localStorage.clear();
     this.router.navigate(["/"]);
   }
+
+  
 
 }

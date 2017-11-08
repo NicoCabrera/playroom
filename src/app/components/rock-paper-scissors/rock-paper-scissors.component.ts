@@ -120,7 +120,7 @@ export class RockPaperScissorsComponent implements OnInit {
     }
   }
   goToRegisteredUserMenu() {
-    this.router.navigate(["/registered-users"]);
+    this.router.navigate(["/registered-users/list-of-games"]);
   }
 
   finishGame() {

@@ -143,7 +143,7 @@ export class MemoTestComponent implements OnInit ,OnDestroy{
   }
 
   goToRegisteredUserMenu(){
-    this.router.navigate(["/registered-users"]);
+    this.router.navigate(["/registered-users/list-of-games"]);
   }
 
   playAgain(){

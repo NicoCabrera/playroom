@@ -1,0 +1,19 @@
+.full-size{
+    width: 100%;
+}
+
+@font-face{
+    font-family: ppal;
+    src: url("../../../assets/fonts/ppal.ttf");
+}
+.ppal-text{
+    font-family: ppal;
+    z-index: 100;
+}
+@font-face{
+    font-family: secondary;
+    src: url("../../../assets/fonts/secondary.ttf");
+}
+.secondary-text{
+    font-family: secondary;
+}

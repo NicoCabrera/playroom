@@ -4,7 +4,6 @@ import { RouterModule, Routes, RouterLinkActive } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Componentes
-import { LoginComponent } from '../components/login/login.component';
 import { ErrorComponent } from '../components/error/error.component';
 import { MainMenuComponent } from '../components/main-menu/main-menu.component';
 import { AnagramComponent } from '../components/anagram/anagram.component';
@@ -14,15 +13,13 @@ import { MathChallengeComponent } from '../components/math-challenge/math-challe
 import { MemoTestComponent } from '../components/memo-test/memo-test.component';
 import { RegisteredUsersComponent } from '../components/registered-users/registered-users.component';
 import { SessionManagerService } from '../services/session-manager.service';
+import { ListOfGamesComponent } from '../components/list-of-games/list-of-games.component';
+import { ScoresComponent } from '../components/scores/scores.component';
 
 const appRoutes: Routes = [
   {
     path: "",
     component: MainMenuComponent
-  },
-  {
-    path: "login",
-    component: LoginComponent
   },
   {
     path: "menu",
@@ -56,7 +53,17 @@ const appRoutes: Routes = [
   {
     path: "registered-users",
     component: RegisteredUsersComponent,
-    canActivate: [SessionManagerService]
+    canActivate: [SessionManagerService],
+    children: [
+      {
+        path: "list-of-games",
+        component: ListOfGamesComponent
+      },
+      {
+        path: "scores",
+        component: ScoresComponent
+      }
+    ]
   },
   {
     path: "**",
@@ -75,7 +82,6 @@ const appRoutes: Routes = [
     )
   ],
   declarations: [
-    LoginComponent,
     ErrorComponent,
     MainMenuComponent,
     AnagramComponent,
@@ -84,7 +90,8 @@ const appRoutes: Routes = [
     MathChallengeComponent,
     MemoTestComponent,
     RegisteredUsersComponent,
-
+    ListOfGamesComponent,
+    ScoresComponent
   ],
   providers: [SessionManagerService]
 })
