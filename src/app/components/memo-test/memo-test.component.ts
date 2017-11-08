@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MemoTest, Card } from '../../classes/memo-test';
+import { Router } from '@angular/router';
 declare var $;
 @Component({
   selector: 'app-memo-test',
   templateUrl: './memo-test.component.html',
   styleUrls: ['./memo-test.component.css'],
 })
-export class MemoTestComponent implements OnInit {
+export class MemoTestComponent implements OnInit ,OnDestroy{
   game: MemoTest;
   result:string;
   colors: Array<string> = [
@@ -20,7 +21,7 @@ export class MemoTestComponent implements OnInit {
     "deep-orange accent-3"
   ];
 
-  constructor() {
+  constructor(private router:Router) {
     this.game = new MemoTest("Memo test");
     this.game.colors = this.colors;
     this.game.colors = this.game.colors.concat(this.colors)
@@ -36,9 +37,13 @@ export class MemoTestComponent implements OnInit {
       this.game.timer.stoper(() => {
         this.game.win = false;
         this.result = "PERDISTE!";
-        $('#modal1').modal('open');
+        $('#modalMemo').modal('open');
       });
     });
+  }
+
+  ngOnDestroy(): void {
+    this.game.timer.stoper(()=>{});
   }
 
   setInitialAnimations() {
@@ -96,7 +101,6 @@ export class MemoTestComponent implements OnInit {
         this.game.firstCardSelected = new Card(-1, "");
         this.game.secondCardSelected = new Card(-1, "");
         this.game.rightAnwerCount++;
-        console.log("Cantidad de respuestas correctas: " + this.game.rightAnwerCount);
         if(this.game.rightAnwerCount == 8){
           this.finishedGame("GANASTE!");
         }
@@ -124,7 +128,7 @@ export class MemoTestComponent implements OnInit {
 
   initializeModalComponent() {
     $(document).ready(function () {
-      $('.modal').modal(
+      $('#modalMemo').modal(
         {
           dismissible: false,
         });
@@ -135,8 +139,35 @@ export class MemoTestComponent implements OnInit {
     this.game.score = this.game.timer.timeLeft * 10;
     this.game.win = true;
     this.game.timer.stoper(() => this.result = message);
-    $('#modal1').modal('open');
+    $('#modalMemo').modal('open');
   }
+
+  goToRegisteredUserMenu(){
+    this.router.navigate(["/registered-users"]);
+  }
+
+  playAgain(){
+    this.game = new MemoTest("Memo test");
+    this.game.colors = this.colors;
+    this.game.colors = this.game.colors.concat(this.colors)
+    this.result = "PERDISTE!";  
+    this.game.initTimer(300);
+    this.setTiles();
+
+    this.colors.forEach(color => {
+      $(".tile").removeClass(color);
+    });
+    $(".tile").removeClass("do-not-flip");
+
+    this.game.startTimer(() => {
+      this.game.timer.stoper(() => {
+        this.game.win = false;
+        this.result = "PERDISTE!";
+        $('#modalMemo').modal('open');
+      });
+    });
+  }
+
 
 
 }

@@ -1,5 +1,6 @@
 <nav>
   <div class="nav-wrapper purple lighten-1">
+      <a class="waves-effect waves-light secondary-text flow-text" (click)="goToRegisteredUserMenu()">* UTN GAMES</a>
     <a href="#" class="brand-logo anagrama center flow-text tiza-text">MEMOTEST</a>
   </div>
 </nav>
@@ -22,17 +23,17 @@
   </div>
 
   <!-- Modal Structure -->
-  <div id="modal1" class="modal">
+  <div id="modalMemo" class="modal">
     <div class="modal-content">
       <h4 class="center-align">{{result}}</h4>
       <p class="center-align">PUNTAJE: {{game.score}}</p>
     </div>
     <div class="row">
       <div class="col s6">
-        <button class="modal-action modal-close waves-effect waves-light btn cyan flow-text full" (click)="Again()">Volver a jugar</button>
+        <button class="modal-action modal-close waves-effect waves-light btn cyan flow-text full" (click)="playAgain()">Volver a jugar</button>
       </div>
       <div class="col s6">
-        <button class="modal-action modal-close waves-effect waves-light btn blue flow-text full" (click)="Quit()">Salir</button>
+        <button class="modal-action modal-close waves-effect waves-light btn blue flow-text full" (click)="goToRegisteredUserMenu()">Salir</button>
       </div>
     </div>
   </div>
