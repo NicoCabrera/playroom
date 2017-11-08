@@ -1,6 +1,7 @@
 <nav>
     <div class="nav-wrapper green">
-        <a href="#" class="brand-logo anagrama right">ANAGRAMA</a>
+        <a class="waves-effect waves-light secondary-text flow-text" (click)="goToRegisteredUserMenu()">*ATRAS</a>
+        <a href="#" class="brand-logo anagrama right flow-text">ANAGRAMA</a>
     </div>
 </nav>
 <div class="row hide-on-small-only">
@@ -54,7 +55,7 @@
         <div class="col s4"></div>
     </div>
     <!-- Modal Structure -->
-    <div id="modal1" class="modal bottom-sheet">
+    <div id="modalAnagram" class="modal bottom-sheet">
         <div class="modal-content">
             <div class="row">
                 <div class="col s12">
@@ -71,8 +72,8 @@
         <div class="modal-footer">
             <div class="row">
                 <div class="col s4 offset-s4">
-                    <a href="#!" class="btn modal-action modal-close waves-effect waves-light green accent-4 full-size" (click)="playAgain()">JUGAR</a>
-                    <a href="/" class="btn modal-action modal-close waves-effect waves-light red accent-3 full-size">SALIR</a>
+                    <a class="btn modal-action modal-close waves-effect waves-light green accent-4 full-size" (click)="playAgain()">JUGAR</a>
+                    <a class="btn modal-action modal-close waves-effect waves-light red accent-3 full-size" (click)="goToRegisteredUserMenu()">SALIR</a>
                 </div>
             </div>
         </div>

@@ -36,3 +36,11 @@
 .btnTimer{
     visibility:hidden;
 }
+
+@font-face{
+    font-family: secondary;
+    src: url("../../../assets/fonts/secondary.ttf");
+}
+.secondary-text{
+    font-family: secondary;
+}

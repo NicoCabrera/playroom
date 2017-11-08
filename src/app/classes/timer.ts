@@ -27,7 +27,11 @@ export class Timer {
         this.sub.unsubscribe();
     }
 
-    getTimeLeft(){
+    getTimeLeft() {
         return this.timeLeft;
+    }
+
+    hasSub(): boolean {
+        return this.sub != null;
     }
 }

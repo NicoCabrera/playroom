@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Anagram } from '../../classes/anagram';
 import { AnagramService } from '../../services/anagram.service';
 import { Timer } from '../../classes/timer';
+import { Router } from '@angular/router';
 declare var $;
 declare var Materialize;
 @Component({
@@ -10,7 +11,7 @@ declare var Materialize;
   styleUrls: ['./anagram.component.css'],
   providers: [AnagramService]
 })
-export class AnagramComponent implements OnInit {
+export class AnagramComponent implements OnInit , OnDestroy{
 
   game: Anagram;
   timer: Timer;
@@ -20,9 +21,9 @@ export class AnagramComponent implements OnInit {
   subtitleMDcol = "col s12 jungla white-text";
   subtitleMDtext = "flow-text center-align text-jungla";
 
-  constructor(public anagramService: AnagramService) {
+  constructor(public anagramService: AnagramService,private router:Router) {
     this.game = new Anagram("Anagrama");
-    this.game.initTimer(1);
+    this.game.initTimer(300);
     this.result = "";
   }
 
@@ -41,6 +42,13 @@ export class AnagramComponent implements OnInit {
          this.validateAnswer();
       }
    });
+  }
+
+  ngOnDestroy(): void {
+
+    if(this.game.timer.hasSub()){
+      this.game.timer.stoper(()=>{});
+    }
   }
 
   validateAnswer() {
@@ -66,7 +74,7 @@ export class AnagramComponent implements OnInit {
     this.game.score = this.game.timer.timeLeft * 10;
     this.game.timer.stoper(() => this.game.shuffledWord = "JUEGO TERMINADO");
     this.result = message;
-    $('#modal1').modal('open');
+    $('#modalAnagram').modal('open');
   }
 
   cleanAnswer() {
@@ -82,7 +90,7 @@ export class AnagramComponent implements OnInit {
       this.game.timer.stoper(() => {
         this.game.shuffledWord = "JUEGO TERMINADO";
         this.result = "PERDISTE!";
-        $('#modal1').modal('open');
+        $('#modalAnagram').modal('open');
       });
     });
   }
@@ -97,7 +105,7 @@ export class AnagramComponent implements OnInit {
 
   initializeModalComponent() {
     $(document).ready(function () {
-      $('.modal').modal(
+      $('#modalAnagram').modal(
         {
           dismissible: false,
         });
@@ -117,6 +125,10 @@ export class AnagramComponent implements OnInit {
     );
     this.startOnClick();
     $("#pulse-timer").addClass("pulse");
+  }
+
+  goToRegisteredUserMenu(){
+    this.router.navigate(["/registered-users"]);
   }
 
 }
