@@ -20,11 +20,11 @@ export class RegisteredUsersComponent implements OnInit {
     $(".button-collapse").sideNav({
       closeOnClick: true,
     });
-    console.log("El nombre de usuario es: " + this.username);
   }
 
   logOut(){
-    localStorage.clear();
+    localStorage.removeItem("username");
+    localStorage.removeItem("email");
     this.router.navigate(["/"]);
   }
 

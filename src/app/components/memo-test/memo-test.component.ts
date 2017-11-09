@@ -1,11 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MemoTest, Card } from '../../classes/memo-test';
 import { Router } from '@angular/router';
+import { GameService } from '../../services/game.service';
 declare var $;
 @Component({
   selector: 'app-memo-test',
   templateUrl: './memo-test.component.html',
   styleUrls: ['./memo-test.component.css'],
+  providers: [GameService]
 })
 export class MemoTestComponent implements OnInit ,OnDestroy{
   game: MemoTest;
@@ -21,7 +23,7 @@ export class MemoTestComponent implements OnInit ,OnDestroy{
     "deep-orange accent-3"
   ];
 
-  constructor(private router:Router) {
+  constructor(private router:Router,private gameService:GameService) {
     this.game = new MemoTest("Memo test");
     this.game.colors = this.colors;
     this.game.colors = this.game.colors.concat(this.colors)
@@ -37,6 +39,7 @@ export class MemoTestComponent implements OnInit ,OnDestroy{
       this.game.timer.stoper(() => {
         this.game.win = false;
         this.result = "PERDISTE!";
+        this.gameService.saveScores(this.game,localStorage.getItem("username"));
         $('#modalMemo').modal('open');
       });
     });
@@ -139,6 +142,7 @@ export class MemoTestComponent implements OnInit ,OnDestroy{
     this.game.score = this.game.timer.timeLeft * 10;
     this.game.win = true;
     this.game.timer.stoper(() => this.result = message);
+    this.gameService.saveScores(this.game,localStorage.getItem("username"));
     $('#modalMemo').modal('open');
   }
 

@@ -91,6 +91,7 @@ export class AnagramComponent implements OnInit , OnDestroy{
       this.game.timer.stoper(() => {
         this.game.shuffledWord = "JUEGO TERMINADO";
         this.result = "PERDISTE!";
+        this.gameService.saveScores(this.game,localStorage.getItem("username"));
         $('#modalAnagram').modal('open');
       });
     });

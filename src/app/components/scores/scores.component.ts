@@ -17,7 +17,8 @@ export class ScoresComponent implements OnInit {
   ngOnInit() {
     let storedData = localStorage.getItem("scores");
     if(storedData != null){
-      this.scores = JSON.parse(storedData);
+      let reverseData = JSON.parse(storedData);
+      this.scores = reverseData.reverse();
     }
 
     

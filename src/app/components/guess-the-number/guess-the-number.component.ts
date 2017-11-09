@@ -1,19 +1,21 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GuessTheNumber } from '../../classes/guess-the-number';
 import { Router } from '@angular/router';
+import { GameService } from '../../services/game.service';
 declare var Materialize;
 declare var $;
 
 @Component({
   selector: 'app-guess-the-number',
   templateUrl: './guess-the-number.component.html',
-  styleUrls: ['./guess-the-number.component.css']
+  styleUrls: ['./guess-the-number.component.css'],
+  providers: [GameService]
 })
 export class GuessTheNumberComponent implements OnInit , OnDestroy{
  
   game: GuessTheNumber;
   result: string;
-  constructor(private router:Router) {
+  constructor(private router:Router,private gameService:GameService) {
     this.game = new GuessTheNumber("Adivina el número", 10, 1);
     this.game.initTimer(300);
     this.result = "";
@@ -41,6 +43,7 @@ export class GuessTheNumberComponent implements OnInit , OnDestroy{
       this.game.timer.stoper(() => {
         this.game.win = false;
         this.result = "PERDISTE!";
+        this.gameService.saveScores(this.game,localStorage.getItem("username"));
         $('#modalGuessTheNumber').modal('open');
       });
     });
@@ -65,6 +68,7 @@ export class GuessTheNumberComponent implements OnInit , OnDestroy{
   }
 
   correct() {
+    this.game.win = true;
     this.finishedGame("GANASTE!");
   }
 
@@ -79,7 +83,9 @@ export class GuessTheNumberComponent implements OnInit , OnDestroy{
 
   finishedGame(message) {
     this.game.score = this.game.timer.timeLeft * 10;
+    
     this.game.timer.stoper(() => this.result = message);
+    this.gameService.saveScores(this.game,localStorage.getItem("username"));
     $('#modalGuessTheNumber').modal('open');
   }
 

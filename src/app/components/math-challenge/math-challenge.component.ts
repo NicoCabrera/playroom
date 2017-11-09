@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MathChallengeService } from '../../services/math-challenge.service';
 import { MathChallenge } from '../../classes/math-challenge';
 import { Router } from '@angular/router';
+import { GameService } from '../../services/game.service';
 declare var $;
 declare var Materialize;
 
@@ -9,7 +10,7 @@ declare var Materialize;
   selector: 'app-math-challenge',
   templateUrl: './math-challenge.component.html',
   styleUrls: ['./math-challenge.component.css'],
-  providers: [MathChallengeService]
+  providers: [MathChallengeService, GameService]
 })
 export class MathChallengeComponent implements OnInit,OnDestroy {
   
@@ -17,7 +18,7 @@ export class MathChallengeComponent implements OnInit,OnDestroy {
   public game: MathChallenge;
   public result: string;
 
-  constructor(public mathChallengeService: MathChallengeService, private router: Router) {
+  constructor(public mathChallengeService: MathChallengeService, private router: Router,private gameService:GameService) {
     this.game = new MathChallenge("Agilidad aritmética");
     this.result = "";
   }
@@ -51,6 +52,7 @@ export class MathChallengeComponent implements OnInit,OnDestroy {
       this.game.timer.stoper(() => {
         this.game.win = false;
         this.result = "PERDISTE!";
+        this.gameService.saveScores(this.game,localStorage.getItem("username"));
         $('#modalMathChallenge').modal('open');
       });
     });
@@ -64,6 +66,7 @@ export class MathChallengeComponent implements OnInit,OnDestroy {
           Materialize.toast("Correcto!", 3000, "rounded");
         } else {
           this.game.win = true;
+          this.game.score = this.game.timer.timeLeft * 10;
           this.finishedGame("GANASTE!");
         }
       } else {
@@ -72,8 +75,9 @@ export class MathChallengeComponent implements OnInit,OnDestroy {
           this.game.timer.timeLeft = this.game.timer.timeLeft - 10;
         } else {
           this.game.timer.stoper(() => {
-            this.finishedGame("PERDISTE!");
+            this.game.win = false;
             this.game.score = 0;
+            this.finishedGame("PERDISTE!");
           });
         }
 
@@ -84,8 +88,8 @@ export class MathChallengeComponent implements OnInit,OnDestroy {
   }
 
   finishedGame(message) {
-    this.game.score = this.game.timer.timeLeft * 10;
     this.game.timer.stoper(() => { this.result = message; });
+    this.gameService.saveScores(this.game,localStorage.getItem("username"));
     $('#modalMathChallenge').modal('open');
   }
 

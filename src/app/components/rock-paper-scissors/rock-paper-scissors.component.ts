@@ -134,9 +134,11 @@ export class RockPaperScissorsComponent implements OnInit {
 
   setResultMessage() {
     if (this.game.partialWins == 2) {
-      this.result = "GANASTE!"
+      this.result = "GANASTE!";
+      this.game.win = true;
     } else {
       this.result = "PERDISTE!";
+      this.game.win = false;
     }
   }
 

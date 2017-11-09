@@ -14,9 +14,9 @@ export class GameService {
 
   constructor(public http: Http) { 
     this.scores = new Array<Score>();
-    this.getScores().then((data)=>{
+    /*this.getScores().then((data)=>{
       this.scores = data;
-    });
+    });*/
   }
 
   public getScores() {
@@ -37,12 +37,10 @@ export class GameService {
       let scores = new Array<Score>();
       scores.push(score);
       localStorage.setItem('scores',JSON.stringify(scores));
-      console.log(localStorage.getItem('scores'));
     }else{
       let scores = JSON.parse(localStorage.getItem('scores'));
       scores.push(score);
       localStorage.setItem('scores',JSON.stringify(scores));
-      console.log(localStorage.getItem('scores'));
     }
   }
 
