@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RockPaperScissors } from '../../classes/rock-paper-scissors';
 import { OptionEnum, MatchResultEnum } from '../../classes/game';
 import { Router } from '@angular/router';
+import { GameService } from '../../services/game.service';
 declare var $;
 declare var Materialize;
 
@@ -9,13 +10,14 @@ declare var Materialize;
   selector: 'app-rock-paper-scissors',
   templateUrl: './rock-paper-scissors.component.html',
   styleUrls: ['./rock-paper-scissors.component.css'],
+  providers: [GameService]
 })
 export class RockPaperScissorsComponent implements OnInit {
   public game: RockPaperScissors;
   public imageForUserValue: string;
   public imageForPCValue: string;
   public result: string;
-  constructor(private router: Router) {
+  constructor(private router: Router,private gameService:GameService) {
     this.game = new RockPaperScissors("Piedra papel o tijera");
     this.imageForUserValue = "assets/img/piedraa.png";
     this.imageForPCValue = "assets/img/piedrab.png";
@@ -125,6 +127,7 @@ export class RockPaperScissorsComponent implements OnInit {
 
   finishGame() {
     this.setResultMessage();
+    this.gameService.saveScores(this.game,localStorage.getItem("username"));
     $('#modalRockPaperScissors').modal('open');
   }
 

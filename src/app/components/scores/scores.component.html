@@ -1,3 +1,21 @@
-<p>
-  scores works!
-</p>
+<div class="container">
+  <table class="highlight">
+    <thead>
+      <tr>
+          <th>Juego</th>
+          <th>Jugador</th>
+          <th>Resultado</th>
+          <th>Puntuación</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let score of scores">
+        <td>{{score.game}}</td>
+        <td>{{score.player}}</td>
+        <td>{{score.result}}</td>
+        <td>{{score.points}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

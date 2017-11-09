@@ -5,7 +5,7 @@ export class Game {
     timer:Timer;
     win:boolean;
     score:number;
-
+    
     constructor(public name: string) {
         this.score = 0;
     }

@@ -3,13 +3,14 @@ import { Anagram } from '../../classes/anagram';
 import { AnagramService } from '../../services/anagram.service';
 import { Timer } from '../../classes/timer';
 import { Router } from '@angular/router';
+import { GameService } from '../../services/game.service';
 declare var $;
 declare var Materialize;
 @Component({
   selector: 'app-anagram',
   templateUrl: './anagram.component.html',
   styleUrls: ['./anagram.component.css'],
-  providers: [AnagramService]
+  providers: [AnagramService, GameService]
 })
 export class AnagramComponent implements OnInit , OnDestroy{
 
@@ -21,7 +22,7 @@ export class AnagramComponent implements OnInit , OnDestroy{
   subtitleMDcol = "col s12 jungla white-text";
   subtitleMDtext = "flow-text center-align text-jungla";
 
-  constructor(public anagramService: AnagramService,private router:Router) {
+  constructor(public anagramService: AnagramService,private router:Router,private gameService:GameService) {
     this.game = new Anagram("Anagrama");
     this.game.initTimer(300);
     this.result = "";
@@ -73,6 +74,7 @@ export class AnagramComponent implements OnInit , OnDestroy{
     this.game.score = this.game.timer.timeLeft * 10;
     this.game.timer.stoper(() => this.game.shuffledWord = "JUEGO TERMINADO");
     this.result = message;
+    this.gameService.saveScores(this.game,localStorage.getItem("username"));
     $('#modalAnagram').modal('open');
   }
 
