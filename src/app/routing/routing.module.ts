@@ -15,6 +15,8 @@ import { RegisteredUsersComponent } from '../components/registered-users/registe
 import { SessionManagerService } from '../services/session-manager.service';
 import { ListOfGamesComponent } from '../components/list-of-games/list-of-games.component';
 import { ScoresComponent } from '../components/scores/scores.component';
+import { AboutComponent } from '../components/about/about.component';
+import { PreviewComponent } from '../components/preview/preview.component';
 
 const appRoutes: Routes = [
   {
@@ -24,6 +26,16 @@ const appRoutes: Routes = [
   {
     path: "menu",
     component: MainMenuComponent,
+    children: [
+      {
+        path: "preview",
+        component: PreviewComponent
+      },
+      {
+        path: "about",
+        component: AboutComponent
+      }
+    ]
   },
   {
     path: "anagram",
@@ -69,7 +81,6 @@ const appRoutes: Routes = [
     path: "**",
     component: ErrorComponent
   }
-
 ];
 
 @NgModule({
@@ -91,8 +102,10 @@ const appRoutes: Routes = [
     MemoTestComponent,
     RegisteredUsersComponent,
     ListOfGamesComponent,
-    ScoresComponent
-  ],
+    ScoresComponent,
+    AboutComponent,
+    PreviewComponent
+    ],
   providers: [SessionManagerService]
 })
 export class RoutingModule { }

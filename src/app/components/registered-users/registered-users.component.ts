@@ -25,7 +25,7 @@ export class RegisteredUsersComponent implements OnInit {
   logOut(){
     localStorage.removeItem("username");
     localStorage.removeItem("email");
-    this.router.navigate(["/"]);
+    this.router.navigate(["/menu/preview"]);
   }
 
   
